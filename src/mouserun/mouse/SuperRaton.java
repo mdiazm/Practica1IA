@@ -47,7 +47,7 @@ public class SuperRaton extends Mouse {
             System.out.printf("Deshaciendo pila\n");
             int aux = deshacer();
             return aux;
-        } else {
+        } else if (grid != null && grid.size() != 0) {
             deshacerPila = false;
         }
         if (grid == null) {
@@ -135,14 +135,13 @@ public class SuperRaton extends Mouse {
 //        if (posibles.size() == 1 && posibles.get(0) == ultimo) {
 //            return posibles.get(0);
 //        }
-
         posibles.remove(new Integer(ultimo));
 
         if (posibles.isEmpty()) {
             System.out.printf("Deshaciendo pila desde la funcion tomarDecision\n");
             deshacerPila = true;
 //            return deshacer();
-              return 0;
+            return 0;
         } else if (posibles.size() == 1) {
             int aux = posibles.get(0);
             posibles.clear();
@@ -185,6 +184,7 @@ public class SuperRaton extends Mouse {
         int aux = pilaMovimientos.pop();
 
 //        ultimo = opuesta(aux);  No necesaria.
+        ultimo = 0;
         return aux;
     }
 }
