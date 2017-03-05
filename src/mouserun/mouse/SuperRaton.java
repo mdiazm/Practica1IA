@@ -32,7 +32,7 @@ public class SuperRaton extends Mouse {
         super("SuperRaton");
         this.posibles = new ArrayList<>();
         this.pilaMovimientos = new Stack<>();
-        this.visitados = new HashMap<>();
+        this.visitados = new HashMap<Long, ArrayList<Integer>>();
         this.ultimo = 0;
         this.deshacerPila = false;
     }
@@ -43,7 +43,7 @@ public class SuperRaton extends Mouse {
         todasDirecciones(currentGrid);
         Long clave = dispersar(currentGrid);
         ArrayList<Integer> grid = visitados.get(clave);
-        if (deshacerPila && grid.isEmpty()) {
+        if (deshacerPila == true && grid.size() == 0) {
             System.out.printf("Deshaciendo pila\n");
             int aux = deshacer();
             return aux;
@@ -57,7 +57,7 @@ public class SuperRaton extends Mouse {
             if (mv == 0) {
                 // Implementar código para deshacer la pila.
                 deshacerPila = true;
-                return 0;
+                return deshacer();
             }
 
             ultimo = opuesta(mv);
@@ -70,9 +70,8 @@ public class SuperRaton extends Mouse {
             System.out.printf("casilla existente\n");
             posibles.clear();
             posibles = new ArrayList<Integer>(grid);
-            
-            
-            if(posibles.isEmpty()){
+
+            if (posibles.isEmpty()) {
                 deshacerPila = true;
                 return deshacer();
             }
@@ -80,14 +79,15 @@ public class SuperRaton extends Mouse {
             int mv = tomarDecision();
             if (mv == 0) {
                 System.out.printf("Hubo un fallo aquí. Se pone una bomba.\n");
-                ultimo = deshacer();
+//                ultimo = deshacer();
                 deshacerPila = true;
                 return opuesta(ultimo);
             }
 
             visitados.remove(clave);
             visitados.put(clave, new ArrayList<Integer>(posibles));
-            pilaMovimientos.push(opuesta(mv));
+            ultimo = opuesta(mv);
+            pilaMovimientos.push(ultimo);
 
             return mv;
 
@@ -132,17 +132,17 @@ public class SuperRaton extends Mouse {
     private int tomarDecision() {
         Random random = new Random();
 
-        if (posibles.size() == 1 && posibles.get(0) == ultimo) {
-            return posibles.get(0);
-        }
+//        if (posibles.size() == 1 && posibles.get(0) == ultimo) {
+//            return posibles.get(0);
+//        }
 
         posibles.remove(new Integer(ultimo));
 
         if (posibles.isEmpty()) {
             System.out.printf("Deshaciendo pila desde la funcion tomarDecision\n");
             deshacerPila = true;
-            return deshacer();
-
+//            return deshacer();
+              return 0;
         } else if (posibles.size() == 1) {
             int aux = posibles.get(0);
             posibles.clear();
@@ -177,14 +177,14 @@ public class SuperRaton extends Mouse {
     }
 
     private int deshacer() {
-        if(pilaMovimientos.empty()){
-            deshacerPila = false; 
+        if (pilaMovimientos.empty()) {
+            deshacerPila = false;
             return 0;
         }
-        
+
         int aux = pilaMovimientos.pop();
-        
-        ultimo = opuesta(aux);
+
+//        ultimo = opuesta(aux);  No necesaria.
         return aux;
     }
 }
