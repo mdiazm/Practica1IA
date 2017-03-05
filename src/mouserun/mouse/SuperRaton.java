@@ -81,7 +81,7 @@ public class SuperRaton extends Mouse {
                 System.out.printf("Hubo un fallo aquí. Se pone una bomba.\n");
 //                ultimo = deshacer();
                 deshacerPila = true;
-                return opuesta(ultimo);
+                return deshacer();
             }
 
             visitados.remove(clave);
