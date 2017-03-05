@@ -50,9 +50,9 @@ public class SuperRaton extends Mouse {
         } else if (grid != null && grid.size() != 0) {
             deshacerPila = false;
         }
-        if (grid == null) {
+        if (grid == null) { // Si la casilla no existe, se introduce en la estructura junto con las posibles rutas accesibles
             System.out.printf("casilla nueva\n");
-            incExploredGrids();
+            incExploredGrids(); // Incrementamos las casillas visitadas.
             int mv = tomarDecision();
             visitados.put(clave, new ArrayList<Integer>(posibles));
             if (mv == 0) {
