@@ -52,6 +52,7 @@ public class SuperRaton extends Mouse {
         }
         if (grid == null) {
             System.out.printf("casilla nueva\n");
+            incExploredGrids();
             int mv = tomarDecision();
             visitados.put(clave, new ArrayList<Integer>(posibles));
             if (mv == 0) {
