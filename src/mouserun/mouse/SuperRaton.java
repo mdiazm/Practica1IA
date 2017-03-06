@@ -27,7 +27,7 @@ public class SuperRaton extends Mouse {
     private Integer ultimo;
 
     private boolean deshacerPila;
-
+    
     public SuperRaton() {
         super("SuperRaton");
         this.posibles = new ArrayList<>();
