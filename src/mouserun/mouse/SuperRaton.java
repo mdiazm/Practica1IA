@@ -98,7 +98,7 @@ public class SuperRaton extends Mouse {
 
     @Override
     public void respawned() {
-
+        
     }
 
     @Override
